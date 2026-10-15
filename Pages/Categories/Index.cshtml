@@ -1,0 +1,27 @@
+﻿@page
+@model GestionProduits.Pages.Categories.IndexModel
+@{
+    ViewData["Title"] = "Catégories";
+}
+
+<h1>Liste des catégories</h1>
+<p><a href="/Categories/Create" class="btn btn-primary">Nouvelle catégorie</a></p>
+
+<table class="table table-striped">
+    <thead>
+        <tr><th>Nom</th><th>Nombre de produits</th><th></th></tr>
+    </thead>
+    <tbody>
+        @foreach (var c in Model.Categories)
+        {
+            <tr>
+                <td>@c.Nom</td>
+                <td>@c.Produits.Count</td>
+                <td>
+                    <a href="/Categories/Edit/@c.Id">Modifier</a> |
+                    <a href="/Categories/Delete/@c.Id">Supprimer</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

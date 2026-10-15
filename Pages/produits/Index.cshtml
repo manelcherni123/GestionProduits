@@ -1,0 +1,48 @@
+﻿@page
+@model GestionProduits.Pages.Produits.IndexModel
+@{
+    ViewData["Title"] = "Produits";
+}
+
+<h1>Liste des produits</h1>
+<p><a href="/Produits/Create" class="btn btn-primary">Nouveau produit</a></p>
+
+<form method="get" class="row g-2 mb-3">
+    <div class="col-auto">
+        <input type="text" name="SearchString" value="@Model.SearchString"
+               class="form-control" placeholder="Rechercher par nom..." />
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-outline-primary">Rechercher</button>
+        <a href="/Produits" class="btn btn-outline-secondary">Réinitialiser</a>
+    </div>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr><th>Nom</th><th>Prix</th><th>Stock</th><th>Catégorie</th><th></th></tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model.Produits)
+        {
+            <tr>
+                <td>@p.Nom</td>
+                <td>@p.Prix.ToString("C")</td>
+                <td>@p.Stock</td>
+                <td>@p.Categorie?.Nom</td>
+                <td>
+                    <a href="/Produits/Edit/@p.Id">Modifier</a> |
+                    <a href="/Produits/Delete/@p.Id">Supprimer</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr class="table-secondary fw-bold">
+            <td>Total / Moyenne</td>
+            <td>@Model.PrixMoyen.ToString("C")</td>
+            <td>@Model.TotalStock</td>
+            <td colspan="2"></td>
+        </tr>
+    </tfoot>
+</table>
